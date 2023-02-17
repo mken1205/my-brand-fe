@@ -21,19 +21,21 @@
             <nav>
                 <img src="images/logo.PNG" class="logo">
                 <ul>
-                    <li><a href="#header">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#background">Background</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#blogs">Blogs</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <embed src="images/x-icon.svg"/> 
                 </ul>
+                <embed src="images/menu_icon.svg" /> 
             </nav>
             <div class="header-text">
                 <p>Full Stack Developer<br>& Web Designer</p>
                 <h1>Hi, I'm <span>Ken</span><br>Mugisha</h1>
             </div>
         </div>
-        <img src="images/background_pic.jpg" width="520px" height="624px" alt="bckgrnd_img" class="bckgrnd-img">
+        <a href="#header"><img src="images/background_pic.jpg" width="520px" height="624px" alt="bckgrnd_img" class="bckgrnd-img"></a>
     </div>
     <!---------about--------->
     <div id="about">
@@ -60,12 +62,13 @@
             <div class="background-box1">
                 <h1>Skills</h1>
                 <div class="background-sub-box">
-                    <img src="images/c_icon.png" width="104px" height="118px" alt="c_icon" class="c-icon">
-                    <img src="images/html_icon.png" width="104px" height="118px" alt="html_icon" class="html-icon">
-                    <img src="images/js_icon.png" width="100px" height="100px" alt="js_icon" class="js-icon">
-                    <img src="images/visual_studio_icon.png" width="120px" height="118px" alt="visual_studio_icon"
+                    <img src="images/c_icon.png" alt="c_icon" class="c-icon">
+                    <img src="images/html_icon.png" alt="html_icon" class="html-icon">
+                    <img src="images/js_icon.png" alt="js_icon" class="js-icon">
+                    <img src="images/visual_studio_icon.png" alt="visual_studio_icon"
                         class="vs-icon">
-                    <img src="images/css_icon.png" width="111px" height="135px" alt="css_icon" class="css-icon">
+                    <img src="images/css_icon.png" alt="css_icon" class="css-icon">
+                    <img src="images/figma_icon.svg" alt="figma_icon">
                 </div>
             </div>
             <div class="background-box2">
@@ -117,25 +120,12 @@
             </div>
         </div>
     </div>
-    <!-------Sing up ------->
-    <div class="sign-up" id="sign-up">
-        <div class="sub-sign1">
-            <h1>Join Our Community</h1>
+    <!-------Blogs------->
+    <div class="blogs" id="blogs">
+        <div class="sub-blog1">
+            <h1>Blogs</h1>
         </div>
-        <div class="sub-sign2">
-            <p>Name</p>
-            <input type="Text" id="name">
-            <p>E-mail</p>
-            <input type="email" id="email">
-            <p>Password</p>
-            <input type="password" id="password">
-        </div>
-        <div class="sub-sign3">
-            <button>Subscribe</button>
-        </div>
-        <div class="sub-sign4">
-            <p>Already a member?<a href="login.html">Log in</a></p>
-        </div>
+        
     </div>
     <!-------Contact----------->
     <div class="contact" id="contact">
@@ -183,20 +173,22 @@
                 </div>
             </div>
             <div class="subcontact2">
-                <form>
+                <form id="contactform" name="contactform" action=" " onsubmit="validate();return false;">
                     <div class="comment-name">
-                        <p id="errorMsg" hidden></p>
-                        <input type="text" id="name" placeholder="Name">
+                        <input type="text" id="contactname" placeholder="Name">
+                        <span style="visibility: visible;color: red; font-family:'inconsolata';margin-bottom: 30px;" id="name_error"></span><br>
                     </div>
                     <div class="comment-email">
-                        <input type="email" id="email" placeholder="E-mail">
+                        <input type="email" id="Email" placeholder="E-mail">
+                        <span style="visibility: visible;color: red; font-family:'inconsolata';" id="email_error"></span>
                     </div>
                     <div class="comment-comment">
-                        <textarea name="comment" id="comment" cols="50" rows="10" placeholder="Comment"></textarea>
+                        <textarea name="comment" id="message" cols="50" rows="10" placeholder="Comment"></textarea>
+                        <span style="visibility: visible;color: red; font-family:'inconsolata'; position: relative;top:5px;"  id="message_error"></span>
                     </div>
                     <div class="comment-submit">
                         <div class="comment-sbmt">
-                            <button type="submit">Send</button>
+                            <button id="submit_contactform" type="submit" >Send</button>
                         </div>
                     </div>
                 </form>
@@ -205,28 +197,79 @@
     </div>
 </body>
 <script>
-    function validateForm(email, name, comment) {
-      let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      let nameRegex = /^[a-zA-Z]+$/;
-      if (!emailRegex.test(email)) {
-        return "Invalid email address";
-      }
-      if (!nameRegex.test(name)) {
-        return "Invalid name. Name should only contain letters";
-      }
 
+    function validate(){
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    const name=document.getElementById("contactname");
+    const email=document.getElementById("Email");
+    const message=document.getElementById("message");
+    const nameerror=document.getElementById("name_error");
+    const emailerror=document.getElementById("email_error");
+    const messageerror=document.getElementById("message_error");
+    if(name.value===""){
     
-      return "Valid";
+        name.style.border="solid 2px red";
+        name_error.innerHTML="Name is required"
+    
+    
+       
+    }
+    if(name.value.length>0&&name.value.length<2){
+        
+        name.style.border="solid 2px red";
+        name_error.innerHTML="Name is too short";
+    
     }
     
-    function validate() {
-      let email = document.getElementById("email").value;
-      let name = document.getElementById("name").value;
-      let password = document.getElementById("password").value;
-    
-      let validationMessage = validateForm(email, name, password);
-      alert(validationMessage);
+    if(name.value.length>1){
+        name.style.border="solid 2px green";
+        name_error.innerHTML="";
     }
+     
+    
+    if(email.value===""){
+        email.style.border="solid 2px red";
+    email_error.innerHTML="Email is required";
+    
+       
+    }
+    if(!email.value.match(mailformat)&& email.value.length>0){
+        email.style.border="solid 2px red";
+        email_error.innerHTML="Enter a valid Email";
+      
+    }
+    if(email.value.match(mailformat)){
+        email.style.border="solid 2px green";
+      email_error.innerHTML="";
+    }
+    
+    
+    if(message.value===""){
+     message.style.border="solid 2px red";
+     message_error.innerHTML="Message is required"
+    
+    
+    }
+    if(message.value.length<3 && message.value.length>0){
+        message.style.border="solid 2px red";
+        message_error.innerHTML="Message is too short"
+       
+    }
+    if(message.value.length>3 && message.value.length>0){
+        message.style.border="solid 2px green";
+        message_error.innerHTML="";
+       
+    }
+    
+    if(document.contactform.contactname.value.length>1  && email.value.match(mailformat)&& email.value.length>0 &&document.contactform.message.value.length>0){
+      swal({
+      title: "Message Sent!",
+      text: "Your Message Was Successfully Sent",
+      icon: "success",
+      button: "OK",
+    })  
+    return true;
+}
+}
     </script>
-    
 </html>

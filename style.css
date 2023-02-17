@@ -33,8 +33,8 @@ nav{
     flex-wrap: wrap;
 }
 .logo{
-    width: 243px;
-    height: 100px;
+    width: 206.55px;
+    height: 85px;
 }
 nav ul li{
     display: inline-block;
@@ -140,8 +140,8 @@ nav ul li a:hover::after{
     align-items: center;
 }
 .background-sub-box img {
-    width: 110px;
-    height: 118px;
+    width: 50%;
+    height: 70%;
 }
 .background-sub-box h2 {
     color: #463F3A;
@@ -183,16 +183,16 @@ color: #463F3A;
     margin-bottom: 20px;
 }
 /*Sing up Page*/
-.sign-up{
+.blogs{
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 25px;
-    padding-bottom: 20px;
+    padding-bottom: 200px;
 }
-.sub-sign1{
+.sub-blog1{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -200,44 +200,6 @@ color: #463F3A;
     font-size: 25px;
     color: #463F3A;
     padding-bottom: 15px;
-
-}
-.sub-sign2{
-    width: 600px;
-    font-size: 30px;
-}
-.sub-sign2 input{
-    width: 100%;
-    border: 0;
-    outline: none;
-    background: #D9D9D9;
-    padding: 15px;
-    margin: 15px 0;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 6px;
-}
-.sub-sign2 p{
-    margin-left: 10px;
-}
-.sub-sign3{
-    width: 500px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.sub-sign3 button{
-    background-color: #463F3A;
-    color: #fff;
-    border-radius: 30px;
-    width: 50%;
-    height: 50%;
-    font-size: 32px;
-}
-.sub-sign4 a{
-    color: #463F3A;
-    text-decoration: none;
 }
 /*Contact Page*/
 .contact{
@@ -328,4 +290,21 @@ color: #463F3A;
 button:hover{
     background-color:#D9D9D7;
     color: #463F3A;
+}
+/*----------------Responsiveness-------------------*/
+@media only screen and (max-width:600px){
+
+    .bckgrnd-img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    .header-text{
+        margin-top: 100%;
+        font-size: 16px;
+    }
+    .header-text h1{
+        font-size: 30px;
+    }
 }
