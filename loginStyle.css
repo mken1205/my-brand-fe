@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Merriweather';
+    box-sizing: border-box;
+}
+body{
+    padding-top: 120px;
+    display: flex;
+    background: #bcb8b1;
+    color: #fff;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+.logo{
+    position: absolute;
+    left: 30px;
+    top: 10px;
+    width: 206.55px;
+    height: 85px;
+}
+.login-p{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+input{
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #D9D9D9;
+    padding: 15px;
+    margin: 15px 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+}
+.sub-login1 p{
+    margin-left: 10px;
+    font-size: 32px;
+}
+.sub-login2{
+    width: 600px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sub-login2 button{
+    background-color: #463F3A;
+    color: #fff;
+    border-radius: 30px;
+    width: 50%;
+    height: 50%;
+    font-size: 32px;
+}
+.sub-login3{
+    text-align: center;
+}
+.sub-login3 a{
+    color: #463F3A;
+    text-decoration: none;
+}
+button:hover{
+    background-color:#D9D9D7;
+    color: #463F3A;
+}

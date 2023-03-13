@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="loginStyle.css">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
     <div id="header">
         <div class="container">
             <nav>
-                <a href="index.html"><img src="images/logo.PNG" class="logo"></a>
+                <a href="/index.html"><img src="images/logo.PNG" class="logo"></a>
             </nav>
         </div>
     </div>
@@ -19,17 +19,132 @@
         <form>
             <div class="sub-login1">
                 <p>E-mail</p>
-                <input type="email" id="email">
+                <input type="text" id="Email" name="email"  value=""  >
+                <span  id="email_error" style=" visibility:visible;  color: red; font-family: 'Inconsolata'; position:relative;"></span><br>
                 <p>Password</p>
-                <input type="password" id="password">
+                <input type="password" id="password" name="password" value="" >
+                <p id="password_error" style=" visibility:hidden; color: red; font-family: 'Inconsolata'; position:relative;top:5px;"> Password is required</p><br>
+                <span id="credential_error" style=" visibility:visible; color: red; font-family: 'Inconsolata'; position:relative;bottom:20px;z-index: 0;"></span><br>
+                
             </div>
             <div class="sub-login2">
-                <button type="submit">Login</button>
+                <button id="submit_login">Login</button>
             </div>
             <div class="sub-login3">
-                <p>Don't have an account?<a href="login.html">Sign up</a></p>
+                <p>Don't have an account?<a href="/singUp.html">Sign up</a></p>
             </div>
         </form>
     </div>
+    <script>
+        function submit(){
+    
+            console.log("It happened");
+            var useremail=document.getElementById('Email').value;
+            var userpassword=document.getElementById('password').value;
+            const req = {email:useremail, password:userpassword}
+            fetch(`http://localhost:5000/api/v1/login`,{
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                body: JSON.stringify(req),
+
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.token);
+                let cookie= data.token;
+                console.log(data)
+                // if(data.status== 200){
+                //     localStorage.setItem('currentUser', JSON.stringify(data))
+                    if (data.data.isAdmin==true){
+                        document.cookie = `token=${cookie}; max-age=3600; path=/;SameSite=Lax`;
+                        window.location.href = "/pages/Admin/admin.html";
+                    }
+                    else{
+                        document.cookie = `token=${cookie}; max-age=3600; path=/;SameSite=Lax`;
+                        window.location.href = "/pages/User/user.html";
+                    }
+                // }
+                // else if(data.status ==401){
+                //     out.innerHTML="Not registered, go to signup?"
+                //     out_pass.innerHTML="Invalid Credential !!"
+                // }
+    
+  })
+  .catch((error) => {
+    alert(error);
+  });
+        /*    var users=JSON.parse(localStorage.getItem('users'));
+        for(var i=0;i<users.length;i++){
+        
+            if(useremail==users[i].email&&userpassword==users[i].password){
+                window.open("sampledashboard.html","_blank");
+                
+               localStorage.setItem('status','auth_status');
+                credential_error.innerHTML='';
+            }
+            else if(useremail!=users[i].email&&userpassword!=users[i].password){
+                credential_error.innerHTML='Incorrect Credentials'
+            }
+        }
+        */
+        }
+        function validate(){
+            console.log('validating')
+            function validate(email) {
+                const pattern = /\w+@\w+\.\w{2,3}/;
+                return pattern.test(email);
+            }
+
+            var isValid = true
+        const email=document.getElementById("Email");
+        const password=document.getElementById("password");
+        const email_error=document.getElementById("email_error");
+        const password_error=document.getElementById("password_error");
+        
+        if(email.value.length==0){
+            email.style.border="solid 2px red";
+            email_error.innerHTML="Email is required";
+            isValid = false;
+            console.log(1)
+        }
+        if(!validate(email.value) && email.value.length>0){
+            email.style.border="solid 2px red";
+            email_error.innerHTML="Enter a valid Email";
+            isValid = false;
+            console.log(2)
+          
+        }
+        if(validate(email.value) == false){
+            email.style.border="1px solid #64ffda";
+            email_error.innerHTML="";
+            isValid = false;
+            console.log(3)
+        }
+        if( password.value==""){
+            password_error.style.visibility="visible";
+            password.style.border="2px solid red";
+            isValid = false;
+            console.log(4)
+        }
+        if(isValid == true){
+            submit()
+            password.style.border="none"
+            password_error.style.visibility="hidden";
+        }        // if(password.value.length>0 &&email.value.length>0){
+          
+        // }
+        }
+        
+        
+        document.getElementById('submit_login').addEventListener('click',function(e){
+            e.preventDefault();
+          
+            validate();
+        });
+    </script>        
 </body>
 </html>
